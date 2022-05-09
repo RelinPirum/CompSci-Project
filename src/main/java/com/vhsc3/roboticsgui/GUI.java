@@ -9,7 +9,7 @@ import java.util.TreeMap;
 
 /** 
  *
- * @author shkno
+ * @author shkno poo
  */
 public class GUI extends javax.swing.JFrame {
 
