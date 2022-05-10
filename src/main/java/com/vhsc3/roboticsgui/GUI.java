@@ -22,6 +22,7 @@ public class GUI extends javax.swing.JFrame {
     private TreeMap<String, String>userID;
     public String username;
     public String password;
+    public boolean pmStat;
     
     public GUI() {
         initComponents();
@@ -59,6 +60,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         taskAdd = new javax.swing.JButton();
         hardTask = new javax.swing.JTextField();
+        Cancel_Button = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -110,7 +112,7 @@ public class GUI extends javax.swing.JFrame {
 
         taskTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null}
             },
             new String [] {
                 "Software", "Hardware", "Marketing"
@@ -137,6 +139,13 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        Cancel_Button.setText("Cancel");
+        Cancel_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Cancel_ButtonActionPerformed(evt);
+            }
+        });
+
         taskLayer.setLayer(softTask, javax.swing.JLayeredPane.DEFAULT_LAYER);
         taskLayer.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
         taskLayer.setLayer(jLabel9, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -144,6 +153,7 @@ public class GUI extends javax.swing.JFrame {
         taskLayer.setLayer(jLabel10, javax.swing.JLayeredPane.DEFAULT_LAYER);
         taskLayer.setLayer(taskAdd, javax.swing.JLayeredPane.DEFAULT_LAYER);
         taskLayer.setLayer(hardTask, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        taskLayer.setLayer(Cancel_Button, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout taskLayerLayout = new javax.swing.GroupLayout(taskLayer);
         taskLayer.setLayout(taskLayerLayout);
@@ -164,7 +174,9 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(taskLayerLayout.createSequentialGroup()
                 .addGap(112, 112, 112)
                 .addComponent(taskAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(Cancel_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         taskLayerLayout.setVerticalGroup(
             taskLayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,7 +194,9 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(markTask, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
                 .addGap(18, 18, 18)
-                .addComponent(taskAdd)
+                .addGroup(taskLayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(taskAdd)
+                    .addComponent(Cancel_Button))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
 
@@ -602,6 +616,7 @@ public class GUI extends javax.swing.JFrame {
         jButton6.setVisible(false);
         loginButton.setVisible(true);
         jButton9.setVisible(true);
+        boolean pmStat = false;
         
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -625,6 +640,7 @@ public class GUI extends javax.swing.JFrame {
         //if(userID.containsKey(jTextField1.getText())){
             if(userID.get(userName.getText()).equals(passWord.getText())){
                 partTable.setEnabled(true);
+                pmStat = true;
                 System.out.println("Haha yeah");
                 
             }else{
@@ -651,6 +667,14 @@ public class GUI extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         partOrderLayer.setVisible(true);
+        if(pmStat = false){
+            jLabel5.setVisible(false);
+            statField.setVisible(false);
+        }
+        else{
+            jLabel5.setVisible(true);
+            statField.setVisible(true);
+        }
         jScrollPane3.setVisible(false);
         jButton4.setVisible(false);
         jButton5.setVisible(false);
@@ -724,43 +748,41 @@ public class GUI extends javax.swing.JFrame {
     private void taskAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taskAddActionPerformed
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) taskTable.getModel();
-        Object[] row = new Object[3];
-        row[0] = softTask.getText();
-        row[1] = hardTask.getText();
-        row[2] = markTask.getText();
+       
         //I have no idea if this works. Its 1am and its spaghetti code If it doesn't, 
         //just delete and add model.addRow(row);
-        for(int i = 0; i >= taskTable.getRowCount()-1; i++){
-            if (hardTask.getText().equals("") && markTask.getText().equals("")
-                    && !softTask.getText().equals("")) {
-                taskTable.setValueAt(softTask.getText(), i, 0);
-            }
-            else if (!hardTask.getText().equals("") && markTask.getText().equals("")
-                    && softTask.getText().equals("")) {
-                taskTable.setValueAt(hardTask.getText(), i, 1);
-            }
-            else if (hardTask.getText().equals("") && !markTask.getText().equals("")
-                    && softTask.getText().equals("")) {
-                taskTable.setValueAt(markTask.getText(), i, 2);
-            }
-            else if (!hardTask.getText().equals("") && markTask.getText().equals("")
-                    && !softTask.getText().equals("")) {
-                taskTable.setValueAt(softTask.getText(), i, 0);
-                taskTable.setValueAt(hardTask.getText(), i, 1);
-            }
-            else if (hardTask.getText().equals("") && !markTask.getText().equals("")
-                    && !softTask.getText().equals("")) {
-                taskTable.setValueAt(softTask.getText(), i, 0);
-                taskTable.setValueAt(markTask.getText(), i, 2);
-            }
-            else if (!hardTask.getText().equals("") && !markTask.getText().equals("")
-                    && softTask.getText().equals("")) {
-                taskTable.setValueAt(hardTask.getText(), i, 1);
-                taskTable.setValueAt(markTask.getText(), i, 2);
-            }
-            else{
-                model.addRow(row);
-            }
+        
+        int val = taskTable.getRowCount() - 1;
+
+        if(!softTask.getText().equals("")){
+                if(model.getValueAt(val, 0) != null){
+                    model.addRow(new  String[]{"", "", ""});
+                }
+                int val1 = 0;
+                if(model.getValueAt(val1, 0) != null){
+                    val1++;
+                }
+                model.setValueAt(softTask.getText(), val, 0);
+        }
+        if(!hardTask.getText().equals("")){
+                if(model.getValueAt(val, 1) != null){
+                    model.addRow(new  String[]{"", "", ""});
+                }
+                int val1 = 0;
+               // while(model.getValueAt(val1, 1) != null){
+                 //   val1++;
+                //}
+                model.setValueAt(softTask.getText(), val, 1);
+        }
+        if(!markTask.getText().equals("")){
+                if(model.getValueAt(val, 2) != null){
+                    model.addRow(new  String[]{"", "", ""});
+                }
+                int val1 = 0;
+                //while(model.getValueAt(val1, 2) != null){
+                  //  val1++;
+                //}
+                model.setValueAt(softTask.getText(), val, 2);
         }
 
         
@@ -774,11 +796,20 @@ public class GUI extends javax.swing.JFrame {
         taskLayer.setVisible(true);
         jScrollPane2.setVisible(false);
         uploadTask.setVisible(false);
+        softTask.setText("");
+        hardTask.setText("");
+        markTask.setText("");
     }//GEN-LAST:event_uploadTaskActionPerformed
 
     private void hardTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hardTaskActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_hardTaskActionPerformed
+
+    private void Cancel_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cancel_ButtonActionPerformed
+        taskLayer.setVisible(false);
+        jScrollPane2.setVisible(true);
+        uploadTask.setVisible(true);
+    }//GEN-LAST:event_Cancel_ButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -821,6 +852,7 @@ public class GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Cancel_Button;
     private javax.swing.JTextField desField;
     private javax.swing.JTextField hardTask;
     private javax.swing.JButton jButton2;

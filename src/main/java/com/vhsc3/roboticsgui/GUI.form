@@ -158,7 +158,7 @@
                     <Component class="javax.swing.JTable" name="taskTable">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="3" rowCount="0">
+                          <Table columnCount="3" rowCount="1">
                             <Column editable="true" title="Software" type="java.lang.Object"/>
                             <Column editable="true" title="Hardware" type="java.lang.Object"/>
                             <Column editable="true" title="Marketing" type="java.lang.Object"/>
@@ -213,7 +213,9 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
                               <Component id="taskAdd" min="-2" pref="73" max="-2" attributes="0"/>
-                              <EmptySpace pref="137" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="Cancel_Button" min="-2" pref="73" max="-2" attributes="0"/>
+                              <EmptySpace pref="46" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -236,7 +238,10 @@
                                   <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="taskAdd" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="taskAdd" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Cancel_Button" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                               <EmptySpace pref="59" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -273,6 +278,14 @@
                     <Component class="javax.swing.JTextField" name="hardTask">
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hardTaskActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="Cancel_Button">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Cancel"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Cancel_ButtonActionPerformed"/>
                       </Events>
                     </Component>
                   </SubComponents>
