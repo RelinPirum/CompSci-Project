@@ -51,7 +51,7 @@ public class GUI extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         uploadTask = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        taskTable = new javax.swing.JTable();
+        softTable = new javax.swing.JTable();
         taskLayer = new javax.swing.JLayeredPane();
         softTask = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -61,6 +61,11 @@ public class GUI extends javax.swing.JFrame {
         taskAdd = new javax.swing.JButton();
         hardTask = new javax.swing.JTextField();
         Cancel_Button = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        hardTable = new javax.swing.JTable();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        markTable = new javax.swing.JTable();
+        delTask = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -110,15 +115,15 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        taskTable.setModel(new javax.swing.table.DefaultTableModel(
+        softTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null}
+
             },
             new String [] {
-                "Software", "Hardware", "Marketing"
+                "Software"
             }
         ));
-        jScrollPane2.setViewportView(taskTable);
+        jScrollPane2.setViewportView(softTable);
 
         jLabel8.setText("Software");
 
@@ -200,31 +205,68 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap(59, Short.MAX_VALUE))
         );
 
+        hardTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Hardware"
+            }
+        ));
+        jScrollPane4.setViewportView(hardTable);
+
+        markTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Marketing"
+            }
+        ));
+        jScrollPane5.setViewportView(markTable);
+
+        delTask.setText("Delete/Complete Task");
+        delTask.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delTaskActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 997, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(uploadTask, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(uploadTask, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(delTask))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(taskLayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addComponent(uploadTask))
+                        .addGap(56, 56, 56)
+                        .addComponent(uploadTask)
+                        .addGap(18, 18, 18)
+                        .addComponent(delTask))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(taskLayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(77, Short.MAX_VALUE))
+                        .addComponent(taskLayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
 
         jTabbedPane5.addTab("Tasks", jPanel2);
@@ -312,7 +354,7 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(93, 93, 93)
                 .addComponent(partLayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 460, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 577, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -517,7 +559,7 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 250, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 367, Short.MAX_VALUE)
                 .addComponent(partOrderLayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
         );
@@ -551,7 +593,9 @@ public class GUI extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane5)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jTabbedPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 1636, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 229, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -616,6 +660,7 @@ public class GUI extends javax.swing.JFrame {
         jButton6.setVisible(false);
         loginButton.setVisible(true);
         jButton9.setVisible(true);
+        delTask.setEnabled(false);
         boolean pmStat = false;
         
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -747,55 +792,49 @@ public class GUI extends javax.swing.JFrame {
 
     private void taskAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taskAddActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) taskTable.getModel();
-       
+        DefaultTableModel sModel = (DefaultTableModel) softTable.getModel();
+        DefaultTableModel hModel = (DefaultTableModel) hardTable.getModel();
+        DefaultTableModel mModel = (DefaultTableModel) markTable.getModel();
         //I have no idea if this works. Its 1am and its spaghetti code If it doesn't, 
         //just delete and add model.addRow(row);
-        
-        int val = taskTable.getRowCount() - 1;
-
+        String softTasks = softTask.getText();
+        String hardTasks = hardTask.getText();
+        String markTasks = markTask.getText();
         if(!softTask.getText().equals("")){
-                if(model.getValueAt(val, 0) != null){
-                    model.addRow(new  String[]{"", "", ""});
-                }
-                int val1 = 0;
-                if(model.getValueAt(val1, 0) != null){
-                    val1++;
-                }
-                model.setValueAt(softTask.getText(), val, 0);
+            Object[] sRow = {softTasks};
+                    
+            sModel.addRow(sRow);
         }
         if(!hardTask.getText().equals("")){
-                if(model.getValueAt(val, 1) != null){
-                    model.addRow(new  String[]{"", "", ""});
-                }
-                int val1 = 0;
-               // while(model.getValueAt(val1, 1) != null){
-                 //   val1++;
-                //}
-                model.setValueAt(softTask.getText(), val, 1);
+            Object[] hRow = {hardTasks};
+            hModel.addRow(hRow);
         }
         if(!markTask.getText().equals("")){
-                if(model.getValueAt(val, 2) != null){
-                    model.addRow(new  String[]{"", "", ""});
-                }
-                int val1 = 0;
-                //while(model.getValueAt(val1, 2) != null){
-                  //  val1++;
-                //}
-                model.setValueAt(softTask.getText(), val, 2);
+            Object[] mRow = {markTasks};
+            mModel.addRow(mRow);
         }
+        
+        
+
 
         
         taskLayer.setVisible(false);
+        delTask.setVisible(true);
         jScrollPane2.setVisible(true);
+        jScrollPane4.setVisible(true);
+        jScrollPane5.setVisible(true);
         uploadTask.setVisible(true);
     }//GEN-LAST:event_taskAddActionPerformed
 
     private void uploadTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadTaskActionPerformed
         // TODO add your handling code here:
+
         taskLayer.setVisible(true);
         jScrollPane2.setVisible(false);
+        jScrollPane4.setVisible(false);
+        jScrollPane5.setVisible(false);
         uploadTask.setVisible(false);
+        delTask.setVisible(false);
         softTask.setText("");
         hardTask.setText("");
         markTask.setText("");
@@ -807,9 +846,39 @@ public class GUI extends javax.swing.JFrame {
 
     private void Cancel_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cancel_ButtonActionPerformed
         taskLayer.setVisible(false);
+        delTask.setVisible(true);
         jScrollPane2.setVisible(true);
+        jScrollPane4.setVisible(true);
+        jScrollPane5.setVisible(true);
         uploadTask.setVisible(true);
     }//GEN-LAST:event_Cancel_ButtonActionPerformed
+
+    private void delTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delTaskActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel sModel = (DefaultTableModel) softTable.getModel();
+        DefaultTableModel hModel = (DefaultTableModel) hardTable.getModel();
+        DefaultTableModel mModel = (DefaultTableModel) markTable.getModel();
+        
+        int delSoft = softTable.getSelectedRow();
+        int delHard = hardTable.getSelectedRow();
+        int delMark = markTable.getSelectedRow();
+        if(!pmStat == true)
+        {
+            delTask.setEnabled(false);
+        }
+        else{
+            if (delSoft >= 0) {
+                sModel.removeRow(delSoft);
+            }
+            if (delHard >= 0) {
+                hModel.removeRow(delHard);
+            }
+            if (delMark >= 0) {
+                mModel.removeRow(delMark);
+            }
+        }
+
+    }//GEN-LAST:event_delTaskActionPerformed
 
     /**
      * @param args the command line arguments
@@ -853,7 +922,9 @@ public class GUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cancel_Button;
+    private javax.swing.JButton delTask;
     private javax.swing.JTextField desField;
+    private javax.swing.JTable hardTable;
     private javax.swing.JTextField hardTask;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -882,10 +953,13 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane5;
     private javax.swing.JLayeredPane layeredPane;
     private javax.swing.JTextField locField;
     private javax.swing.JButton loginButton;
+    private javax.swing.JTable markTable;
     private javax.swing.JTextField markTask;
     private javax.swing.JMenuItem menuItem_close;
     private javax.swing.JMenuItem menuItem_open;
@@ -897,11 +971,11 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLayeredPane partOrderLayer;
     private javax.swing.JTable partTable;
     private javax.swing.JTextField passWord;
+    private javax.swing.JTable softTable;
     private javax.swing.JTextField softTask;
     private javax.swing.JTextField statField;
     private javax.swing.JButton taskAdd;
     private javax.swing.JLayeredPane taskLayer;
-    private javax.swing.JTable taskTable;
     private javax.swing.JTextField toolField;
     private javax.swing.JTable toolTable;
     private javax.swing.JButton uploadTask;
