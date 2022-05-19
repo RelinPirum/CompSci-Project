@@ -5,8 +5,18 @@
  */
 package com.vhsc3.roboticsgui;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Arrays;
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,6 +33,7 @@ public class GUI extends javax.swing.JFrame {
     public String username;
     public String password;
     public boolean pmStat;
+    private File currentFile;
     
     public GUI() {
         initComponents();
@@ -609,9 +620,19 @@ public class GUI extends javax.swing.JFrame {
         jMenu1.add(menuItem_open);
 
         menuItem_save.setText("Save");
+        menuItem_save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItem_saveActionPerformed(evt);
+            }
+        });
         jMenu1.add(menuItem_save);
 
         menuItem_saveAs.setText("Save As");
+        menuItem_saveAs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItem_saveAsActionPerformed(evt);
+            }
+        });
         jMenu1.add(menuItem_saveAs);
 
         menuItem_close.setText("Close");
@@ -638,8 +659,31 @@ public class GUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void menuItem_openActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItem_openActionPerformed
-        // TODO add your handling code here:
+        JFileChooser jfc = new JFileChooser();
+
+        if (jfc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+
+            try {
+                
+                File selectedFile = jfc.getSelectedFile();
+                currentFile = selectedFile;
+                FileInputStream fis = new FileInputStream(selectedFile);
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                GUI model = (GUI) ois.readObject();
+                ois.close();
+                menuItem_save.setEnabled(false);
+
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
        
     }//GEN-LAST:event_menuItem_openActionPerformed
 
@@ -874,6 +918,50 @@ public class GUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_delTaskActionPerformed
 
+    private void menuItem_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItem_saveActionPerformed
+        if (currentFile == null) {
+            menuItem_saveAsActionPerformed(evt);
+        } 
+        else {
+            try {
+                
+                FileOutputStream fos = new FileOutputStream(currentFile);
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                oos.writeObject(new GUI());
+                oos.close();
+                menuItem_save.setEnabled(false);
+                
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_menuItem_saveActionPerformed
+
+    private void menuItem_saveAsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItem_saveAsActionPerformed
+        JFileChooser jfc = new JFileChooser();
+
+        if (jfc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+
+            try {
+                File selectedFile = jfc.getSelectedFile();
+                currentFile = selectedFile;
+                FileOutputStream fos = new FileOutputStream(selectedFile);
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                oos.writeObject(new GUI());
+                oos.close();
+                menuItem_save.setEnabled(false);
+
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    }//GEN-LAST:event_menuItem_saveAsActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -911,6 +999,10 @@ public class GUI extends javax.swing.JFrame {
                 
             }
         });
+        
+    }
+    
+    private void buildTasks(){
         
     }
 
