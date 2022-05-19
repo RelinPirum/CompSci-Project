@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.table.DefaultTableModel;
 
 /** 
@@ -109,6 +110,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
+        delPart = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuItem_open = new javax.swing.JMenuItem();
@@ -556,6 +558,13 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap(43, Short.MAX_VALUE))
         );
 
+        delPart.setText("Delete Part");
+        delPart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delPartActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -566,10 +575,11 @@ public class GUI extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(delPart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(49, 49, 49)
                 .addComponent(partOrderLayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(341, Short.MAX_VALUE))
@@ -583,13 +593,16 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(jButton5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton6)
+                .addGap(18, 18, 18)
+                .addComponent(delPart)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(0, 22, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(layeredPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(partOrderLayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jTabbedPane5.addTab("Part Order", jPanel4);
@@ -700,6 +713,7 @@ public class GUI extends javax.swing.JFrame {
         jButton9.setVisible(true);
         delTask.setEnabled(false);
         boolean pmStat = false;
+        delPart.setVisible(false);
         
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -710,6 +724,10 @@ public class GUI extends javax.swing.JFrame {
         jButton4.setVisible(true);
         jButton5.setVisible(true);
         jButton6.setVisible(true);
+        delPart.setVisible(true);
+        if(userID.containsKey(userName.getText())){
+            JOptionPane.showMessageDialog(null, "Username Already Taken");
+        }
         String username = userName.getText();
         String password = passWord.getText();
         userID.put(username, password);
@@ -721,12 +739,22 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         //if(userID.containsKey(jTextField1.getText())){
-            if(userID.get(userName.getText()).equals(passWord.getText())){
-                partTable.setEnabled(true);
-                pmStat = true;
-                System.out.println("Haha yeah");
+
+            if(!userID.containsKey(userName.getText())&&!userID.containsValue(passWord.getText())
+                    ||!userID.get(userName.getText()).equals(passWord.getText())){
+                JOptionPane.showMessageDialog(null, "Incorrect Username or Password. Please try again");
+                userName.setText("");
+                passWord.setText("");
                 
-            }else{
+            }
+            else if (userID.get(userName.getText()).equals(passWord.getText())) {
+            partTable.setEnabled(true);
+            pmStat = true;
+            delTask.setEnabled(true);
+            System.out.println("Haha yeah");
+
+        }
+            else{
                 System.out.println("no");
             }
         //}
@@ -740,6 +768,7 @@ public class GUI extends javax.swing.JFrame {
         jButton6.setVisible(true);
         loginButton.setVisible(false);
         jButton9.setVisible(false);
+        delPart.setVisible(true);
         
     }//GEN-LAST:event_loginButtonActionPerformed
 
@@ -762,6 +791,7 @@ public class GUI extends javax.swing.JFrame {
         jButton4.setVisible(false);
         jButton5.setVisible(false);
         jButton6.setVisible(false);
+        delPart.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -783,6 +813,7 @@ public class GUI extends javax.swing.JFrame {
         partField.setText("");
         desField.setText("");
         statField.setText("");
+        delPart.setVisible(true);
         
         
     }//GEN-LAST:event_jButton7ActionPerformed
@@ -962,13 +993,30 @@ public class GUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_menuItem_saveAsActionPerformed
 
+    private void delPartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delPartActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) partTable.getModel();
+        int delRow = partTable.getSelectedRow();
+        if (pmStat == true) {
+
+            if (delRow >= 0) {
+                model.removeRow(delRow);
+                JOptionPane.showMessageDialog(null, "Row Deleted");
+            } else {
+                JOptionPane.showMessageDialog(null, "Unable to Deleted");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Not a Project Manager");
+        }
+           
+    }//GEN-LAST:event_delPartActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
-        
-        
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -996,10 +1044,10 @@ public class GUI extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GUI().setVisible(true);
-                
+
             }
         });
-        
+
     }
     
     private void buildTasks(){
@@ -1008,6 +1056,7 @@ public class GUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cancel_Button;
+    private javax.swing.JButton delPart;
     private javax.swing.JButton delTask;
     private javax.swing.JTextField desField;
     private javax.swing.JTable hardTable;
