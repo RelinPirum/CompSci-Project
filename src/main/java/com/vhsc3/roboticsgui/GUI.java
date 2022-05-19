@@ -12,6 +12,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.TreeMap;
 import java.util.logging.Level;
@@ -24,16 +25,19 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author shkno poo
  */
-public class GUI extends javax.swing.JFrame {
+public class GUI extends javax.swing.JFrame implements Serializable {
 
     /**
      * Creates new form GUI
      */
-    private TreeMap<String, String>userID;
+    private TreeMap<String, String> userID;
     public String username;
     public String password;
     public boolean pmStat;
     private File currentFile;
+    public DefaultTableModel softT;
+    public DefaultTableModel hardT;
+    public DefaultTableModel marT;
     
     public GUI() {
         initComponents();
@@ -46,6 +50,8 @@ public class GUI extends javax.swing.JFrame {
         partOrderLayer.setVisible(false);
         partLayer.setVisible(false);
         taskLayer.setVisible(false);
+        currentFile = null;
+        
     }
 
     /**
@@ -109,6 +115,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
+        uploadButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuItem_open = new javax.swing.JMenuItem();
@@ -128,7 +135,7 @@ public class GUI extends javax.swing.JFrame {
 
         softTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null}
             },
             new String [] {
                 "Software"
@@ -218,7 +225,7 @@ public class GUI extends javax.swing.JFrame {
 
         hardTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null}
             },
             new String [] {
                 "Hardware"
@@ -228,7 +235,7 @@ public class GUI extends javax.swing.JFrame {
 
         markTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null}
             },
             new String [] {
                 "Marketing"
@@ -556,6 +563,13 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap(43, Short.MAX_VALUE))
         );
 
+        uploadButton.setText("Upload");
+        uploadButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uploadButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -566,10 +580,11 @@ public class GUI extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(uploadButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(49, 49, 49)
                 .addComponent(partOrderLayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(341, Short.MAX_VALUE))
@@ -583,6 +598,8 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(jButton5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(uploadButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGap(0, 22, Short.MAX_VALUE)
@@ -660,6 +677,9 @@ public class GUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
+ 
+    
+    
     private void menuItem_openActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItem_openActionPerformed
         JFileChooser jfc = new JFileChooser();
 
@@ -671,8 +691,12 @@ public class GUI extends javax.swing.JFrame {
                 currentFile = selectedFile;
                 FileInputStream fis = new FileInputStream(selectedFile);
                 ObjectInputStream ois = new ObjectInputStream(fis);
-                GUI model = (GUI) ois.readObject();
-                ois.close();
+                DataFile model = (DataFile) ois.readObject();
+                //ois.close();
+                markTable.setModel(model.getMK());
+                hardTable.setModel(model.getHW());
+                softTable.setModel(model.getSW());
+
                 menuItem_save.setEnabled(false);
 
             } catch (FileNotFoundException ex) {
@@ -783,12 +807,13 @@ public class GUI extends javax.swing.JFrame {
         partField.setText("");
         desField.setText("");
         statField.setText("");
-        
+        menuItem_save.setEnabled(true);
         
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        
         jScrollPane1.setVisible(false);
         partLayer.setVisible(true);
         jButton2.setVisible(false);
@@ -810,7 +835,7 @@ public class GUI extends javax.swing.JFrame {
         jButton3.setVisible(true);
         toolField.setText("");
         locField.setText("");
-        
+        menuItem_save.setEnabled(true);
         
     }//GEN-LAST:event_partAddActionPerformed
 
@@ -830,6 +855,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void taskAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taskAddActionPerformed
         // TODO add your handling code here:
+        menuItem_save.setEnabled(true);
         DefaultTableModel sModel = (DefaultTableModel) softTable.getModel();
         DefaultTableModel hModel = (DefaultTableModel) hardTable.getModel();
         DefaultTableModel mModel = (DefaultTableModel) markTable.getModel();
@@ -927,7 +953,8 @@ public class GUI extends javax.swing.JFrame {
                 
                 FileOutputStream fos = new FileOutputStream(currentFile);
                 ObjectOutputStream oos = new ObjectOutputStream(fos);
-                oos.writeObject(new GUI());
+                oos.writeObject(new DataFile((DefaultTableModel)softTable.getModel(), 
+                (DefaultTableModel)hardTable.getModel(), (DefaultTableModel)markTable.getModel()));
                 oos.close();
                 menuItem_save.setEnabled(false);
                 
@@ -941,26 +968,47 @@ public class GUI extends javax.swing.JFrame {
 
     private void menuItem_saveAsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItem_saveAsActionPerformed
         JFileChooser jfc = new JFileChooser();
-
+        
         if (jfc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
-
             try {
                 File selectedFile = jfc.getSelectedFile();
                 currentFile = selectedFile;
                 FileOutputStream fos = new FileOutputStream(selectedFile);
                 ObjectOutputStream oos = new ObjectOutputStream(fos);
-                oos.writeObject(new GUI());
+                oos.writeObject(new DataFile((DefaultTableModel)softTable.getModel(), 
+                (DefaultTableModel)hardTable.getModel(), (DefaultTableModel)markTable.getModel()));
+
                 oos.close();
                 menuItem_save.setEnabled(false);
+
 
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NullPointerException ex){
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-
+            
         }
     }//GEN-LAST:event_menuItem_saveAsActionPerformed
+
+    private void uploadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadButtonActionPerformed
+            
+        try {
+            FileOutputStream fos = new FileOutputStream(new File("target" + File.separator+"savepls"));
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(new DataFile((DefaultTableModel)softTable.getModel(), 
+            (DefaultTableModel)hardTable.getModel(), (DefaultTableModel)markTable.getModel()));
+            oos.close();
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("Cool");
+    }//GEN-LAST:event_uploadButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1002,9 +1050,7 @@ public class GUI extends javax.swing.JFrame {
         
     }
     
-    private void buildTasks(){
-        
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cancel_Button;
@@ -1064,6 +1110,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLayeredPane taskLayer;
     private javax.swing.JTextField toolField;
     private javax.swing.JTable toolTable;
+    private javax.swing.JButton uploadButton;
     private javax.swing.JButton uploadTask;
     private javax.swing.JTextField userName;
     // End of variables declaration//GEN-END:variables
