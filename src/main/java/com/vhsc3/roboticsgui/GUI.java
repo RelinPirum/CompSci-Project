@@ -111,6 +111,7 @@ public class GUI extends javax.swing.JFrame implements Serializable {
         jLabel2 = new javax.swing.JLabel();
         loginButton = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
         partOrderLayer = new javax.swing.JLayeredPane();
         partField = new javax.swing.JTextField();
         desField = new javax.swing.JTextField();
@@ -120,6 +121,7 @@ public class GUI extends javax.swing.JFrame implements Serializable {
         jLabel5 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
         uploadButton = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuItem_open = new javax.swing.JMenuItem();
@@ -453,12 +455,20 @@ public class GUI extends javax.swing.JFrame implements Serializable {
             }
         });
 
+        cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
+
         layeredPane.setLayer(userName, javax.swing.JLayeredPane.DEFAULT_LAYER);
         layeredPane.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         layeredPane.setLayer(passWord, javax.swing.JLayeredPane.DEFAULT_LAYER);
         layeredPane.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         layeredPane.setLayer(loginButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
         layeredPane.setLayer(jButton9, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        layeredPane.setLayer(cancelButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layeredPaneLayout = new javax.swing.GroupLayout(layeredPane);
         layeredPane.setLayout(layeredPaneLayout);
@@ -479,7 +489,9 @@ public class GUI extends javax.swing.JFrame implements Serializable {
                             .addComponent(passWord, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
                             .addComponent(userName)))
                     .addGroup(layeredPaneLayout.createSequentialGroup()
-                        .addGap(113, 113, 113)
+                        .addGap(22, 22, 22)
+                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -497,7 +509,8 @@ public class GUI extends javax.swing.JFrame implements Serializable {
                 .addGap(42, 42, 42)
                 .addGroup(layeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(loginButton)
-                    .addComponent(jButton9))
+                    .addComponent(jButton9)
+                    .addComponent(cancelButton))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -574,6 +587,13 @@ public class GUI extends javax.swing.JFrame implements Serializable {
             }
         });
 
+        deleteButton.setText("Delete");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -585,6 +605,7 @@ public class GUI extends javax.swing.JFrame implements Serializable {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(updateButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -604,6 +625,8 @@ public class GUI extends javax.swing.JFrame implements Serializable {
                 .addComponent(uploadButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(updateButton)
+                .addGap(18, 18, 18)
+                .addComponent(deleteButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
@@ -759,6 +782,7 @@ public class GUI extends javax.swing.JFrame implements Serializable {
         delTask.setEnabled(false);
         boolean pmStat = false;
         uploadButton.setVisible(false);
+        deleteButton.setVisible(false);
         
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -775,6 +799,7 @@ public class GUI extends javax.swing.JFrame implements Serializable {
         userName.setText("");
         passWord.setText("");
         uploadButton.setVisible(true);
+        deleteButton.setVisible(true);
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
@@ -803,6 +828,7 @@ public class GUI extends javax.swing.JFrame implements Serializable {
         jButton5.setVisible(true);
         updateButton.setVisible(true);
         loginButton.setVisible(false);
+        deleteButton.setVisible(true);
         jButton9.setVisible(false);
         uploadButton.setVisible(true);
         
@@ -851,6 +877,7 @@ public class GUI extends javax.swing.JFrame implements Serializable {
         jButton5.setVisible(false);
         updateButton.setVisible(false);
         uploadButton.setVisible(false);
+        deleteButton.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -874,6 +901,8 @@ public class GUI extends javax.swing.JFrame implements Serializable {
         statField.setText("");
         menuItem_save.setEnabled(true);
         uploadButton.setVisible(true);
+        deleteButton.setVisible(true);
+
         
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -1208,6 +1237,36 @@ public class GUI extends javax.swing.JFrame implements Serializable {
         }
     }//GEN-LAST:event_uploadButtonActionPerformed
 
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) partTable.getModel();
+        int delRow = partTable.getSelectedRow();
+        if(pmStat == true){
+            if (delRow >= 0) {
+                model.removeRow(delRow);
+                JOptionPane.showMessageDialog(null, "Row Deleted");
+            } else {
+                JOptionPane.showMessageDialog(null, "Unable to Deleted");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Not a PM. Please try again");
+        }
+
+    }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        // TODO add your handling code here:
+        jScrollPane3.setVisible(true);
+        layeredPane.setVisible(false);
+        jButton4.setVisible(true);
+        jButton5.setVisible(true);
+        updateButton.setVisible(true);
+
+        uploadButton.setVisible(true);
+        deleteButton.setVisible(true);
+    }//GEN-LAST:event_cancelButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1252,7 +1311,9 @@ public class GUI extends javax.swing.JFrame implements Serializable {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cancel_Button;
+    private javax.swing.JButton cancelButton;
     private javax.swing.JButton delTask;
+    private javax.swing.JButton deleteButton;
     private javax.swing.JTextField desField;
     private javax.swing.JTable hardTable;
     private javax.swing.JTextField hardTask;
