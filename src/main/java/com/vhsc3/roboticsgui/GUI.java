@@ -40,6 +40,7 @@ public class GUI extends javax.swing.JFrame implements Serializable {
     public DefaultTableModel softT;
     public DefaultTableModel hardT;
     public DefaultTableModel marT;
+    public File currentfile;
     
     public GUI() {
         initComponents();
@@ -141,7 +142,7 @@ public class GUI extends javax.swing.JFrame implements Serializable {
 
         softTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null}
+
             },
             new String [] {
                 "Software"
@@ -231,7 +232,7 @@ public class GUI extends javax.swing.JFrame implements Serializable {
 
         hardTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null}
+
             },
             new String [] {
                 "Hardware"
@@ -241,7 +242,7 @@ public class GUI extends javax.swing.JFrame implements Serializable {
 
         markTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null}
+
             },
             new String [] {
                 "Marketing"
@@ -737,7 +738,6 @@ public class GUI extends javax.swing.JFrame implements Serializable {
     }
     private void menuItem_openActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItem_openActionPerformed
         JFileChooser jfc = new JFileChooser();
-        System.out.println(evt);
         if (jfc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
 
             try {
@@ -747,9 +747,6 @@ public class GUI extends javax.swing.JFrame implements Serializable {
                 FileInputStream fis = new FileInputStream(selectedFile);
                 ObjectInputStream ois = new ObjectInputStream(fis);
                 DataFile model = (DataFile) ois.readObject();
-                ArrayList<String> softT = model.getSW();
-                ArrayList<String> hardT = model.getHW();
-                ArrayList<String> marT = model.getMK();
                 populate(model.getSW(), model.getHW(), model.getMK(), model.getTool(), model.getParts());
                 ois.close();
                 
@@ -838,7 +835,8 @@ public class GUI extends javax.swing.JFrame implements Serializable {
         
         FileInputStream fis = null;
         try {
-            fis = new FileInputStream(new File("target" + File.separator+"saveplease"));
+            
+            fis = new FileInputStream(currentFile);
             ObjectInputStream ois = new ObjectInputStream(fis);
             DataFile model = (DataFile) ois.readObject();
             ArrayList<String> softT = model.getSW();
@@ -1217,7 +1215,7 @@ public class GUI extends javax.swing.JFrame implements Serializable {
                     marT.add(markTable.getValueAt(i,0).toString());
                 }
             }   
-            fos = new FileOutputStream(new File("target" + File.separator+"saveplease")); // forces the program to only save on this file which
+            fos = new FileOutputStream(currentFile); // forces the program to only save on this file which
                                                                                           //is used to communicate with other computers
             ObjectOutputStream oos = new ObjectOutputStream(fos);   //Writes the object onto a file
             oos.writeObject(new DataFile(softT,
