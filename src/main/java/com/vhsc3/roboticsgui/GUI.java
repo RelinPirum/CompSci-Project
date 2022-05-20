@@ -140,7 +140,7 @@ public class GUI extends javax.swing.JFrame implements Serializable {
 
         softTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null}
+
             },
             new String [] {
                 "Software"
@@ -230,7 +230,7 @@ public class GUI extends javax.swing.JFrame implements Serializable {
 
         hardTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null}
+
             },
             new String [] {
                 "Hardware"
@@ -240,7 +240,7 @@ public class GUI extends javax.swing.JFrame implements Serializable {
 
         markTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null}
+
             },
             new String [] {
                 "Marketing"
