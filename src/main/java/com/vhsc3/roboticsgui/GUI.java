@@ -828,6 +828,7 @@ public class GUI extends javax.swing.JFrame implements Serializable {
         deleteButton.setVisible(true);
         jButton9.setVisible(false);
         uploadButton.setVisible(true);
+        delTask.setEnabled(true);
         
     }//GEN-LAST:event_loginButtonActionPerformed
 
