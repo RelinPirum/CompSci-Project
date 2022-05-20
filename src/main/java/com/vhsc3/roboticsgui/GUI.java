@@ -55,6 +55,7 @@ public class GUI extends javax.swing.JFrame implements Serializable {
         currentFile = null;
         
         
+        
     }
 
     /**
@@ -604,12 +605,13 @@ public class GUI extends javax.swing.JFrame implements Serializable {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(updateButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(0, 22, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(layeredPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(partOrderLayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jTabbedPane5.addTab("Part Order", jPanel4);
@@ -756,6 +758,7 @@ public class GUI extends javax.swing.JFrame implements Serializable {
         jButton9.setVisible(true);
         delTask.setEnabled(false);
         boolean pmStat = false;
+        uploadButton.setVisible(false);
         
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -771,12 +774,14 @@ public class GUI extends javax.swing.JFrame implements Serializable {
         userID.put(username, password);
         userName.setText("");
         passWord.setText("");
+        uploadButton.setVisible(true);
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
         
         //if(userID.containsKey(jTextField1.getText())){
+        
             if(userID.get(userName.getText()).equals(passWord.getText())){
                 partTable.setEnabled(true);
                 pmStat = true;
@@ -784,6 +789,9 @@ public class GUI extends javax.swing.JFrame implements Serializable {
                 
             }else{
                 System.out.println("no");
+                JOptionPane.showMessageDialog(null, "Incorrect Username or Password. Try again");
+                userName.setText("");
+                passWord.setText("");
             }
         //}
         System.out.println(userID);
@@ -796,6 +804,7 @@ public class GUI extends javax.swing.JFrame implements Serializable {
         updateButton.setVisible(true);
         loginButton.setVisible(false);
         jButton9.setVisible(false);
+        uploadButton.setVisible(true);
         
     }//GEN-LAST:event_loginButtonActionPerformed
 
@@ -841,6 +850,7 @@ public class GUI extends javax.swing.JFrame implements Serializable {
         jButton4.setVisible(false);
         jButton5.setVisible(false);
         updateButton.setVisible(false);
+        uploadButton.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -863,6 +873,7 @@ public class GUI extends javax.swing.JFrame implements Serializable {
         desField.setText("");
         statField.setText("");
         menuItem_save.setEnabled(true);
+        uploadButton.setVisible(true);
         
     }//GEN-LAST:event_jButton7ActionPerformed
 
